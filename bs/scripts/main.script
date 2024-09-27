@@ -1,0 +1,38 @@
+local m_game = require "bs.lua.game"
+local dtn_switch = 0.15
+
+function init(self)
+	particlefx.play("#dust")
+	math.randomseed(100000 * (socket.gettime() % 1))
+	math.random()
+	math.random()
+	math.random()
+	self.name = "start"
+	self.collection_id = collectionfactory.create("#cnfactory-start")
+end
+
+local function collection_replace(self)
+	go.delete(self.collection_id)
+	timer.delay(dtn_switch, false, function()
+		self.collection_id = collectionfactory.create("#cnfactory-" .. self.name)
+	end)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == m_game.start then
+		self.name = "start"
+		collection_replace(self)
+	elseif message_id == m_game.game then
+		self.name = "game"
+		collection_replace(self)
+	elseif message_id == m_game.over then
+		self.name = "over"
+		collection_replace(self)
+	elseif message_id == m_game.help then
+		self.name = "help"
+		collection_replace(self)
+	elseif message_id == m_game.settings then
+		self.name = "settings"
+		collection_replace(self)
+	end
+end

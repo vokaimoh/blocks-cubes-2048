@@ -1,0 +1,10 @@
+name: "background"
+tags: "background"
+vertex_program: "/builtins/materials/sprite.vp"
+fragment_program: "/bs/materials/background.fp"
+vertex_space: VERTEX_SPACE_WORLD
+vertex_constants {
+  name: "view_proj"
+  type: CONSTANT_TYPE_VIEWPROJ
+}
+max_page_count: 0
