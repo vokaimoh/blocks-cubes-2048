@@ -1,0 +1,45 @@
+go.property("level", 1)
+
+local m_game = require "bs.lua.game"
+local scl_link = vmath.vector3(0.8, 0.8, 1)
+
+function init(self)
+	sprite.play_flipbook("#sprite", tostring(self.level))
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == m_game.fade_in then
+		go.set("#sprite", "tint.w", 0)
+		m_game.go_animate_alpha("#sprite", go.PLAYBACK_ONCE_FORWARD, 1, message.duration)
+	elseif message_id == m_game.fade_out then
+		local alpha = go.get("#sprite", "tint.w")
+		if alpha < 1 then
+			local add = (1 - alpha) / 2
+			local dtn = message.duration / (1 / add)
+			timer.delay(dtn, false, function()
+				m_game.go_animate_alpha("#sprite", go.PLAYBACK_ONCE_FORWARD, 0, message.duration - dtn)
+			end)
+			m_game.go_animate_alpha("#sprite", go.PLAYBACK_ONCE_FORWARD, alpha + add, dtn)
+		else
+			m_game.go_animate_alpha("#sprite", go.PLAYBACK_ONCE_FORWARD, 0, message.duration)
+		end
+	elseif message_id == m_game.scale_in then
+		go.set("#sprite", "scale", m_game.scl_zero)
+		go.animate("#sprite", "scale", go.PLAYBACK_ONCE_FORWARD, m_game.scl_unit, go.EASING_LINEAR, message.duration)
+	elseif message_id == m_game.scale_out then
+		go.animate("#sprite", "scale", go.PLAYBACK_ONCE_FORWARD, m_game.scl_zero, go.EASING_LINEAR, message.duration)
+	elseif message_id == m_game.delete then
+		timer.delay(message.duration, false, function()
+			go.delete(".")
+		end)
+	elseif message_id == m_game.link then
+		go.animate("#sprite", "scale", go.PLAYBACK_ONCE_FORWARD, scl_link, go.EASING_LINEAR, message.duration)
+		m_game.go_animate_alpha("#sprite", go.PLAYBACK_ONCE_FORWARD, 0.8, message.duration)
+	elseif message_id == m_game.unlink then
+		go.animate("#sprite", "scale", go.PLAYBACK_ONCE_FORWARD, m_game.scl_unit, go.EASING_LINEAR, message.duration)
+		m_game.go_animate_alpha("#sprite", go.PLAYBACK_ONCE_FORWARD, 1, message.duration)
+	elseif message_id == m_game.levelup then
+		self.level = self.level + 1
+		sprite.play_flipbook("#sprite", tostring(self.level))
+	end
+end

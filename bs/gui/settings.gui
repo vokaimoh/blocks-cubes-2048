@@ -1,0 +1,196 @@
+script: "/bs/gui/settings.gui_script"
+fonts {
+  name: "rubik-medium-22"
+  font: "/bs/fonts/rubik-medium-22.font"
+}
+fonts {
+  name: "rubik-black-60"
+  font: "/bs/fonts/rubik-black-60.font"
+}
+textures {
+  name: "gui"
+  texture: "/bs/atlases/gui.atlas"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "box"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 270.0
+    y: 922.0
+  }
+  size {
+    x: 420.0
+    y: 100.0
+  }
+  color {
+    x: 0.9490196
+    y: 0.9490196
+    z: 0.9490196
+  }
+  type: TYPE_TEXT
+  text: "SETTINGS"
+  font: "rubik-black-60"
+  id: "title"
+  pivot: PIVOT_N
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 100.0
+    y: 545.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.9490196
+    y: 0.9490196
+    z: 0.9490196
+  }
+  type: TYPE_TEXT
+  text: "GAME SOUNDS"
+  font: "rubik-medium-22"
+  id: "label-volume"
+  pivot: PIVOT_W
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 440.0
+    y: 545.0
+  }
+  size {
+    x: 140.0
+    y: 100.0
+  }
+  color {
+    x: 0.9490196
+    y: 0.9490196
+    z: 0.9490196
+  }
+  type: TYPE_TEXT
+  text: "50 %"
+  font: "rubik-medium-22"
+  id: "counter-volume"
+  pivot: PIVOT_E
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 440.0
+    y: 478.5
+  }
+  size {
+    x: 150.0
+    y: 18.0
+  }
+  type: TYPE_BOX
+  texture: "gui/slider-background"
+  id: "slider-background"
+  pivot: PIVOT_E
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 100.0
+    y: 478.5
+  }
+  size {
+    x: 150.0
+    y: 18.0
+  }
+  type: TYPE_BOX
+  texture: "gui/slider-fill"
+  id: "slider-fill"
+  pivot: PIVOT_W
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 270.0
+    y: 478.5
+  }
+  size {
+    x: 340.0
+    y: 48.0
+  }
+  type: TYPE_BOX
+  id: "slider-area"
+  parent: "box"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  position {
+    x: 270.0
+    y: 478.5
+  }
+  size {
+    x: 40.0
+    y: 48.0
+  }
+  type: TYPE_BOX
+  texture: "gui/slider_handle"
+  id: "slider-handle"
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 270.0
+    y: 78.0
+  }
+  type: TYPE_BOX
+  texture: "gui/back"
+  id: "button-back"
+  parent: "box"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/bs/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
